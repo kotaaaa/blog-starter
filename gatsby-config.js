@@ -3,7 +3,7 @@ module.exports = {
         title: `kotaaaa's blog`,
         author: {
             name: `Kota Kawaguchi`,
-            summary: `who works in Tokyo, Japan`,
+            summary: `who works in Tokyo, Japan\n`,
         },
         description: `A starter blog demonstrating what Gatsby can do.`,
         siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
