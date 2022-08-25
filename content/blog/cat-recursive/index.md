@@ -1,6 +1,6 @@
 ---
 title: Cat file recursively
-date: "2021-11-28T18:46:37.121Z"
+date: "2020-11-14T18:46:37.121Z"
 description: Can file recursively
 ---
 

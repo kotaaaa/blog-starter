@@ -1,6 +1,6 @@
 ---
 title: What I learned about Naive Bayes
-date: "2021-11-28T17:40:32.169Z"
+date: "2019-05-28T17:40:32.169Z"
 description: Naive Bayes, Algorizm
 ---
 
