@@ -73,7 +73,7 @@ As for usage, after adding a Line friend, you can add and delete TODOs on the ta
 
 ## System configuration diagram
 
-! [](https://raw.githubusercontent.com/kotaaaa/linebot/master/architecture_linebot.drawio.svg)
+<img width="700" alt="architecture_linebot.svg" src="https://raw.githubusercontent.com/kotaaaa/linebot/master/architecture_linebot.drawio.svg">
 
 We built a 3-tier system where App server, Web server, and DB server are set up on separate `Pod` (containers).
 The communication between the `Services` uses `metadata` and name resolution inside Kubernetes.

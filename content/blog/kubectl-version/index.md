@@ -1,6 +1,6 @@
 ---
 title: Kubectl version returns dial tcp timeout
-date: "2022-08-25T00:00:00.000Z"
+date: "2022-10-17T00:00:00.000Z"
 description: Kubectl, tcp
 ---
 

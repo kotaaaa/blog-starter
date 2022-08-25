@@ -1,6 +1,6 @@
 ---
 title: How to be Atcoder Green Level
-date: "2022-08-25T00:00:00.000Z"
+date: "2021-09-10T00:00:00.000Z"
 description: Python, Algorizm, Leetcode
 ---
 
@@ -255,7 +255,7 @@ def factorial(n):
     """
     mod = pow(10, 9) + 7
     ans = 1
-    for i in range(1, n+1):
+    for i in range(1, n + 1):
         ans *= i
         ans %= mod
     return ans
