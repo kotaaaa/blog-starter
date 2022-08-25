@@ -70,7 +70,7 @@ Solving past problems at #### [Atcoder Problems](https://kenkoooo.com/atcoder/#/
 
 #### Atcoder Problems' [Training Features](https://kenkoooo.com/atcoder/#/training) [2020/03 ~ 2021/06]
 
-! [image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/239544/f6878662-5ad4-9a4e-012f-2ef94fc1f4ae.png)
+<img width="700" alt="image.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/239544/f6878662-5ad4-9a4e-012f-2ef94fc1f4ae.png">
 
 - This is not a feature that has received much attention(?). Atcoder Problems has a training function. Personally, I have made great use of it.
 - There are three levels, Easy, Medium, and Hard, each consisting of 100 problems in gray, brown, and green, respectively. The difficulty level is sorted by Difficulty, so you can see the gradual increase in difficulty. I think it was easy to get a sense of the level of users who can solve each problem, and at the same time, it was just right for me to find a problem that fits my level.
@@ -92,8 +92,7 @@ Solving past problems at #### [Atcoder Problems](https://kenkoooo.com/atcoder/#/
 
 ### Algorithms that I have already mastered at this point
 
-The following is a list of algorithms that I have mastered at this point in time. [[AtCoder] What I did to become green as an ordinary person](https://qiita.com/Kota-Y/items/396ab3c57830dad65cfb#4-)
-%E5%AD%A6%E3%82%93%E3%81%A0%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E3%81%A8%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0)
+The following is a list of algorithms that I have mastered at this point in time [[AtCoder] What I did to become green as an ordinary person](https://qiita.com/Kota-Y/items/396ab3c57830dad65cfb#4-%0A%20%E5%AD%A6%E3%82%93%E3%81%A0%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E3%81%A8%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0).
 The most recent problems using each algorithm are also included. (Some problems are not necessarily assumed solutions.)
 
 |                     Algorizm                     | Comprehension (◎,○,△,×) |         Did you solve it during the contest? (Sample)         |
