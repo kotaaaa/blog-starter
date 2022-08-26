@@ -8,7 +8,7 @@ description: Kubectl, tcp
 
 ## Problem
 
-```
+```shell
 $ kubectl version
 WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
 Client Version: version.Info{Major:"1", Minor:"24", GitVersion:"v1.24.0", GitCommit:"4ce5a8954017644c5420bae81d72b09b735c21f0", GitTreeState:"clean", BuildDate:"2022-05-03T13:36:49Z", GoVersion:"go1.18.2", Compiler:"gc", Platform:"darwin/amd64"}
@@ -18,7 +18,7 @@ Unable to connect to the server: dial tcp 192.168.99.104:8443: i/o timeout
 
 ## Solution
 
-```
+```shell
 $ brew update && brew upgrade
 $ brew reinstall kubernetes-cli
 $ brew install minikube
@@ -43,7 +43,7 @@ $ minikube start
 
 ## Result
 
-```
+```shell
 $ kubectl version
 WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
 Client Version: version.Info{Major:"1", Minor:"24", GitVersion:"v1.24.0", GitCommit:"4ce5a8954017644c5420bae81d72b09b735c21f0", GitTreeState:"clean", BuildDate:"2022-05-03T13:36:49Z", GoVersion:"go1.18.2", Compiler:"gc", Platform:"darwin/amd64"}
