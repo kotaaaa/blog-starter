@@ -24,7 +24,9 @@ Sometimes used for training and inference of machine learning models.
 - Worker
   - Process/sub-process to execute the task
 
-# [Airflow's Architecture](https://airflow.apache.org/docs/apache-airflow/2.2.3/concepts/overview.html)
+# Airflow's Architecture
+
+[Reference](https://airflow.apache.org/docs/apache-airflow/2.2.3/concepts/overview.html)
 
 <img width="700" alt="airflow_architecture.png" src="./airflow_architecture.png">
 
