@@ -8,7 +8,8 @@ description: Kubernetes, Flask, Python
 
 I have been involved in the development and operation of a system running on Kubernetes for my business, and since I have not had the opportunity to build an entire Kubernetes system from scratch, I took this opportunity to build a simple **LineBot using Flask on GKE.**
 
-For the purpose of creating a simple Linebot for personal use, you can use [Cloud functions](https://cloud.google.com/functions/docs/concepts/overview?hl=ja) or [AWS Lambda](https You may think that using Kubernetes is a bit overspecified because you can deploy quickly using serverless technologies such as [Cloud functions]() or [AWS Lambda](https://aws.amazon.com/jp/lambda/).
+For the purpose of creating a simple Linebot for personal use, you can use [Cloud functions](https://cloud.google.com/functions/docs/concepts/overview) or [AWS Lambda](https://aws.amazon.com/jp/lambda/) You may think that using Kubernetes is a bit overspecified because you can deploy quickly using serverless technologies.
+
 The main purpose of this workshop is to build a system from scratch using Kubernetes (on GKE), **to get an overall picture of an app using Kubernetes**, and to deepen our understanding of the various objects of Kubernetes.
 
 However, there are also advantages to adopting Kubernetes, most notably
@@ -53,7 +54,7 @@ Except for some files such as `secret.yaml`, the entire source code is available
 In recent years, a number of technologies have been introduced to manage infrastructure configuration in code, collectively known as Infrastructure as Code (IaC). By describing infrastructure parameters such as server specs in code based on declarative descriptions, power equality can be taken into account and the reproducibility of infrastructure construction can be improved. In addition, it reduces maintenance costs and avoids the need for human resources, which are advantages that have led to its adoption in a number of products.
 Among them, k8s is one of the representative OSS of [CNCF](https://ja.wikipedia.org/wiki/Cloud_Native_Computing_Foundation), which has become the de facto standard for container orchestration products. One of.
 
-# What is [GKE](https://cloud.google.com/kubernetes-engine/docs/concepts/kubernetes-engine-overview?hl=ja).
+# What is [GKE](https://cloud.google.com/kubernetes-engine/docs/concepts/kubernetes-engine-overview).
 
 > Google Kubernetes Engine (GKE) provides a managed environment for deploying, managing, and scaling containerized applications using Google's infrastructure. Engine instances), which are grouped together to form clusters.
 
@@ -152,9 +153,9 @@ The implementation of Line Developers registration and Linebot CallBack is not c
 
 ## Obtain SSL certificate for public domain
 
-Refer to [Using Google Managed SSL Certificates](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs?hl=ja#gcloud) using the `Ingress` object. Google Managed SSL Certificate built.
+Refer to [Using Google Managed SSL Certificates](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs#gcloud) using the `Ingress` object. Google Managed SSL Certificate built.
 
-### [Reserving a static external global IP address](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address?hl=ja)
+### [Reserving a static external global IP address](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address?)
 
 ```shell
 gcloud compute addresses create linebot-ingress --global --ip-version IPV4
@@ -315,7 +316,7 @@ The `ConfigMap` and `Secret` are set up to hold DB user names and passwords. The
 We also use `PersistentVolume` and `PersistentVolumeClaim` to allocate Mysql persistent volumes on a Kubernetes cluster.
 The data in the `Pod` created by Kubernetes will disappear when the `Pod` is deleted, so the DB data will be initialized on each restart.
 To ensure that the mysql data is not lost when the `Pod` is deleted, we use a `PersistentVolume` object to make the data persistent.
-If you are going to build a DB server for a full-scale production environment, it is recommended to use a managed service such as [**Cloud SQL**](https://cloud.google.com/sql/docs/mysql?hl=ja). Since the primary purpose of this system is learning, the system configuration is as shown above.
+If you are going to build a DB server for a full-scale production environment, it is recommended to use a managed service such as [**Cloud SQL**](https://cloud.google.com/sql/docs/mysql). Since the primary purpose of this system is learning, the system configuration is as shown above.
 
 It is possible to use a `Loadbalancer` type of `Service` instead of `Ingress` to publish the application to the outside world.
 In this case, we set it up to manage SSL certificate settings. In `Ingress`, refer to the `ManagedCertificate` object.
