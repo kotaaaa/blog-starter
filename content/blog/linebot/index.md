@@ -444,8 +444,7 @@ The `Service` describes the parameters that control communication between the `P
 The `Service` provides different network configurations identified by Type.
 Typical examples are `ClusterIP`, `LoadBalancer`, and `NodePort`.
 The differences between them are summarized very clearly in the article at [Link](https://cstoku.dev/posts/2018/k8sdojo-09/).
-The `ClusterIP` issues an IP address that cannot be accessed from outside the cluster. On the other hand, `NodePort` and `Service` of `LoadBalancer` can be accessed from outside the cluster. The difference between `NodePort` and `LoadBalancer` is that
-NodePort`is used to access each node individually, and`LoadBalancer` is used when the load balancer distributes the access to each node.
+The `ClusterIP` issues an IP address that cannot be accessed from outside the cluster. On the other hand, `NodePort` and `Service` of `LoadBalancer` can be accessed from outside the cluster. The difference between `NodePort` and `LoadBalancer` is that `NodePort`is used to access each node individually, and `LoadBalancer` is used when the load balancer distributes the access to each node.
 
 In this system, Nginx is used as a reverse proxy to handle requests from the outside, and the App container and DB container do not need to be exposed to the outside.
 
