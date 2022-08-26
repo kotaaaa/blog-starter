@@ -1,6 +1,6 @@
 ---
 title: TODO management Linebot with GKE & Flask
-date: "2022-08-25T00:00:00.000Z"
+date: "2022-04-21T00:00:00.000Z"
 description: Kubernetes, Flask, Python
 ---
 
@@ -91,7 +91,7 @@ The **GCP services** used are.
 
 # Directory Structure
 
-```$ tree
+```shell
 $ tree
 .
 ├── LICENSE
@@ -134,7 +134,7 @@ service.yaml │ └── uwsgi.ini
 
 The `docker-compose` command allows you to launch App, Web, and DB containers in a local environment.
 
-```
+```shell
 $ pwd
 /path/to/dir/linebot/
 // Launch App, Web, and DB applications
@@ -156,7 +156,7 @@ Refer to [Using Google Managed SSL Certificates](https://cloud.google.com/kubern
 
 ### [Reserving a static external global IP address](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address?hl=ja)
 
-```
+```shell
 gcloud compute addresses create linebot-ingress --global --ip-version IPV4
 ```
 
@@ -178,7 +178,7 @@ TTL is set to the default of 1 hour.
 
 # Deployment flow to GKE cluster
 
-```
+```shell
 Create GCP Artifact Registry
             ↓ ↓ ↓ ↓ ↓ ↓
 Create GCP Cluster and Node
@@ -195,7 +195,7 @@ Verify operation (+ delete GCP cluster)
 Create a GCP Artifact Registry with GCP project ID in `PROJECT_ID`.
 The Artifact Registry is the location where the Docker Images created by Build are stored. You will later specify the images in the Artifact Registry in the `Deployment` object.
 
-```
+```shell
 $ gcloud artifacts repositories create linebot-repo \}
     --project={PROJECT_ID}
     --repository-format=docker \
@@ -211,7 +211,7 @@ gcloud container clusters create linebot-gke --num-nodes 3 --zone asia-northeast
 
 Here we have created a cluster called `linebot-gke`.
 
-```
+```shell
 $ kubectl get nodes
 NAME STATUS ROLES AGE VERSION
 gke-linebot-gke-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Ready <none> 2d v1.21.9-gke.1002
@@ -229,7 +229,7 @@ The `metadata` in the later `deployment` allows for `app-server` name resolution
 
 #### app/Dockerfile
 
-``Dockerfile
+```Dockerfile
 FROM python:3.9.7
 WORKDIR /app
 COPY . /app
@@ -241,17 +241,18 @@ EXPOSE 5000
 CMD ["uwsgi","--ini","/app/uwsgi.ini"].
 
 ```
-Nginx default settings in ``. /default.conf` file.
-The `location /` directive in ``location /`` passes the request to Flask for all accesses under `/` for http communication (via Port80).
+
+Nginx default settings in `./default.conf` file. The `location/` directive in `location/`passes the request to Flask for all accesses under`/` for http communication (via Port 80).
 
 #### web/Dockerfile
-``Dockerfile
+
+```Dockerfile
 FROM nginx:latest
 COPY . /default.conf /etc/nginx/conf.d/
 CMD ["nginx", "-g", "daemon off;", "-c", "/etc/nginx/nginx.conf"].
 ```
 
-```web/default.conf
+```nginx
 server {
     listen 80;
     location / {
@@ -269,7 +270,7 @@ server {
 
 The following commands will build the Dockerfile and save it to the Artifact Registry. The build is done on GCP.
 
-```
+```shell
 // Build image and deploy
 $ pwd
 /path/to/dir/linebot/
@@ -327,7 +328,9 @@ The `Deployment` defines the state that the `Pod` should be in. If a `Pod` is de
 
 The `Deployment` is a declarative object that defines the ideal state of a `Pod` and is not an object that actually consumes CPU or memory resources. Therefore, in the figure, the arrow points from outside the `Node` to the `Pod`.
 
-```web/deployment.yaml
+###### web/deployment.yaml
+
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -348,10 +351,11 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 80
-
 ```
 
-```app/deployment.yaml
+###### app/deployment.yaml
+
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -372,10 +376,11 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
-
 ```
 
-```db/deployment.yaml
+###### db/deployment.yaml
+
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -426,7 +431,6 @@ spec:
             items:
               - key: init.sql
                 path: init.sql
-
 ```
 
 ### [Service](https://kubernetes.io/ja/docs/concepts/services-networking/service/)
@@ -447,7 +451,9 @@ In this system, Nginx is used as a reverse proxy to handle requests from the out
 - Web container (`Nginx`) -> `NodePort`.
 - App container, DB container-> `ClusterIP and `app/service.yaml.
 
-```app/service.yaml
+###### app/service.yaml
+
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -463,10 +469,11 @@ spec:
       targetPort: 5000
   selector:
     app: app-server
-
 ```
 
-```web/service.yaml
+###### web/service.yaml
+
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -483,10 +490,11 @@ spec:
       nodePort: 30082
   selector:
     app: linebot-nginx
-
 ```
 
-```db/service.yaml
+###### db/service.yaml
+
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -500,12 +508,11 @@ spec:
       protocol: TCP
   selector:
     app: mysql-db
-
 ```
 
 Port in `web/service.yaml` means the following
 
-```
+```shell
 port: 80 -> Port number of the application in the container receiving external access
 targetPort: 80 -> Port number of the destination
 nodePort: 30082 -> Port number of the externally accessed Node to which the Pod is assigned.
@@ -514,7 +521,7 @@ nodePort: 30082 -> Port number of the externally accessed Node to which the Pod 
 And later, after deploying each object and launching the `Pod`, you can use the
 You can go into the `linebot-nginx` `Pod` and see that it can resolve the `metadata` name of the `app-server`.
 
-```
+```shell
 $ kubectl get pod
 NAME READY STATUS RESTARTS AGE
 app-server1-xxxxxxxxxxx 1/1 Running 0 23m
@@ -533,7 +540,9 @@ Similar concepts of giving names to objects are `Label` and `Selector`, but they
 
 The `Ingress` is responsible for forwarding external accesses to the internal `Service`. The system creates a `ManagedCertificate` object that uses GKE's Google Managed SSL Certificate and references the functionality of using SSL certificates in `Ingress` to provide SSL encryption for the `mydomain.com` server.
 
-```ingress/managed-cert-ingress.yaml
+###### ingress/managed-cert-ingress.yaml
+
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -548,17 +557,18 @@ spec:
       name: linebot-nginx　　　　　　　# Service name of the backend. Here, linebot-nginx is specified for the web application.
       port:
         number: 80
-
 ```
 
-```managed-cert.yaml
+###### managed-cert.yaml
+
+```yaml
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
   name: managed-cert
 spec:
   domains:
-    - mydomain.com           # Acquired domain name
+    - mydomain.com # Acquired domain name
 ```
 
 ### [Pod](https://kubernetes.io/ja/docs/concepts/workloads/pods/pod-overview/)
@@ -579,7 +589,9 @@ In our system, we used it to refer to the SQL we wanted to execute when launchin
 It is referenced in `metadata: init-db-sql` by `db/deployment.yaml`.
 ([this article](https://qiita.com/higakin/items/b562eac58714d6681fa6) was helpful).
 
-```db/configmap.yaml
+###### db/configmap.yaml
+
+```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -607,7 +619,9 @@ It is encoded in `Base64` or similar to keep passwords and other sensitive infor
 The advantage is that sensitive setting values such as passwords can be handled without retaining them in raw data.
 In this system, we managed `Mysql` passwords with `Secret`.
 
-```db/secret.yaml
+###### db/secret.yaml
+
+```yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -634,7 +648,9 @@ data:
 Define the resources you want to request with `PersistentVolumeClaim`. It appears that it should be used in conjunction with `PersistentVolume`.
 ([this article](https://qiita.com/witchy/items/3a39b674097b86a44546) was helpful)
 
-```db/persistent-volume.yaml
+###### db/persistent-volume.yaml
+
+```yaml
 kind: PersistentVolume
 apiVersion: v1
 metadata:
@@ -668,7 +684,7 @@ storage: 5Gi # use 5GB of PV's capacity
 
 ### Deploy each k8s object.
 
-```
+```shell
 # Build & Run containers
 kubectl apply \f
     -f app/deployment.yaml \f
@@ -686,7 +702,7 @@ kubectl apply \f
 
 ## Delete GCP cluster.
 
-```
+```shell
 ## Make sure delete cluster not to be billed!
 $ gcloud container clusters delete linebot-gke --zone asia-northeast1
 ```

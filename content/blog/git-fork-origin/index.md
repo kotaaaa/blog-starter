@@ -1,6 +1,6 @@
 ---
 title: Git fork origin
-date: "2020-10-28T19:12:03.284Z"
+date: "2019-10-28T19:12:03.284Z"
 description: "git fork origin"
 ---
 
