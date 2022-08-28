@@ -125,7 +125,7 @@ During the contest, I copy and paste the util functions whenever I can use them.
 
 #### greatest common divisor
 
-```python:
+```python
 def gcd (a,b):
     """greatest common divisor of a,b, gcd
     Args:
@@ -142,7 +142,7 @@ def gcd (a,b):
 
 #### least common multiple
 
-```python:
+```python
 def lcm(a, b):
     """
     least common multiple of a and b
@@ -157,7 +157,7 @@ def lcm(a, b):
 
 #### Approximate Enumeration
 
-```python:
+```python
 def divisor(n):
     """Enumerate divisors of n
     Args:
@@ -178,7 +178,7 @@ def divisor(n):
 
 #### prime factorization
 
-```python:
+```python
 def prime_decomposition(n):
     """
     prime_decomposition(n): def prime_decomposition(n)
@@ -201,7 +201,7 @@ def prime_decomposition(n):
 
 #### prime number determination
 
-```python:
+```python
 def is_prime(n):
     """
     determine prime number
@@ -221,7 +221,7 @@ def is_prime(n):
 
 #### ncr compute
 
-```python:
+```python
 from operator import mul
 from functools import reduce
 def ncr(n,r):
@@ -243,7 +243,7 @@ def ncr(n,r):
 
 #### Factorial calculations
 
-```python:
+```python
 def factorial(n):
     """
     factorial(n): def factorial(n!
