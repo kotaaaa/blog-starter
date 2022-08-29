@@ -1,5 +1,5 @@
 ---
-title: Extract API response data to BigQuery template with Terraform
+title: Template of Extracting API response data to BigQuery with Terraform
 date: "2022-08-30T00:00:00.000Z"
 description: Python, Terraform, tmdb, GCP
 ---
