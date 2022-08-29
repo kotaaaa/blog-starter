@@ -18,7 +18,7 @@ In this ariticle, I used [tmbd movie API data](https://www.themoviedb.org/docume
 
 Even if the API that we use change, all we have to do is to change the API endpoint and BigQuery table schema to match the API response data.
 
-This case fits small project; we do not have to manage complicated workflow. If the application is Mid-Size and above, it is better to use [Airflow](https://airflow.apache.org/) or [Argo CI](https://argoproj.github.io/) so that we can easily manage whole workflow with addtional convenient functions.
+This case is suitable for smaller projects, where there is no need to manage complex workflows. If the application is Mid-Size and above, it is better to use [Airflow](https://airflow.apache.org/) or [Argo CI](https://argoproj.github.io/) so that we can easily manage whole workflow with addtional convenient functions.
 
 # Entire Source Code
 
@@ -30,14 +30,14 @@ This case fits small project; we do not have to manage complicated workflow. If 
 - [BigQuery](https://cloud.google.com/bigquery): save API raw data to BigQuery Table
 - [Cloud Pub/Sub](https://cloud.google.com/pubsub): Queues used as data relay points
 - [Cloud Scheduler](https://cloud.google.com/scheduler): set to run process regularly.
-- [Google Cloud Storage](https://cloud.google.com/storage): to save tf state file.
+- [Google Cloud Storage](https://cloud.google.com/storage): bucket to save tf state file.
 
 # Data source
 
 - [tmdb api document](https://www.themoviedb.org/documentation/api)
 
 In this sample, I am using [trending endpoint](https://developers.themoviedb.org/3/trending/get-trending), please check this response json schema, as I am pre-define BigQuery table schema in below's tf config files.
-and add TMDB_KEY environment variable in .env file.
+and add TMDB_KEY environment variable in `.env` file.
 
 # Architecture
 
@@ -46,13 +46,15 @@ and add TMDB_KEY environment variable in .env file.
 The process itself is written in Cloud Function. The API described in Cloud Function is invoked, and the response data is inserted into BigQuery via Publish to Pub/Sub topics.
 
 In addition, terraform state file have to be saved in somewhere.
-In this sample, I created "collecting-tf-state", then I save tf state file in this GCS bucket.
+In this sample, I created gcs bucket called "collecting-tf-state". then I save tf state file in this gcs bucket.
 
 # Before we do
 
 - GCP project is required. If you does not have, please create it.
 
 # Terraform setting files
+
+Replace {$GCP_PROJECT_NAME} with the name of your GCP project.
 
 #### bigquery.tf
 
@@ -341,7 +343,7 @@ WITH data AS (
       vote_average,
       _PARTITIONTIME as pt,
       ROW_NUMBER() OVER (PARTITION BY _PARTITIONTIME ORDER BY vote_average DESC) AS row_number
-  FROM `gcp-compute-engine-343613.collecting_db.tmdb_trending`
+  FROM `{$GCP_PROJECT_NAME}.collecting_db.tmdb_trending`
   ORDER BY _PARTITIONTIME DESC, vote_average DESC
 )
 SELECT
