@@ -1,6 +1,9 @@
+const languages = require("./src/data/languages")
+
 module.exports = {
   siteMetadata: {
     title: `kotaaaa's blog`,
+    languages,
     author: {
       name: `Kota Kawaguchi`,
       summary: `who works in Tokyo, Japan\n`,
@@ -126,6 +129,15 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: "gatsby-plugin-i18n",
+      options: {
+        langKeyForNull: "any",
+        langKeyDefault: languages.defaultLangKey,
+        useLangKeyLayout: true,
+        prefixDefault: false,
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

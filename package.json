@@ -3,15 +3,17 @@
     "private": true,
     "description": "A starter for a blog powered by Gatsby and Markdown",
     "version": "0.1.0",
-    "author": "Kota Kawaguchi <mathews.kyle@gmail.com>",
+    "author": "Kota Kawaguchi <kota.k.1132.pda@gmail.com>",
     "bugs": {
         "url": "https://github.com/gatsbyjs/gatsby/issues"
     },
     "dependencies": {
         "gatsby": "@4.1.2",
+        "gatsby-link": "^4.22.0",
         "gatsby-plugin-feed": "^4.1.0",
         "gatsby-plugin-gatsby-cloud": "^4.1.0",
         "gatsby-plugin-google-analytics": "^4.1.0",
+        "gatsby-plugin-i18n": "^1.0.1",
         "gatsby-plugin-image": "^2.1.0",
         "gatsby-plugin-manifest": "^4.1.0",
         "gatsby-plugin-offline": "^5.1.0",
@@ -26,12 +28,14 @@
         "gatsby-source-filesystem": "^4.1.0",
         "gatsby-transformer-remark": "^5.21.0",
         "gatsby-transformer-sharp": "^4.1.0",
+        "intl": "^1.2.5",
         "katex": "^0.16.0",
         "ngx-text-diff": "^0.6.0",
         "prismjs": "^1.25.0",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
         "react-helmet": "^6.1.0",
+        "react-intl": "^2.8.0",
         "typeface-merriweather": "0.0.72",
         "typeface-montserrat": "0.0.75"
     },
